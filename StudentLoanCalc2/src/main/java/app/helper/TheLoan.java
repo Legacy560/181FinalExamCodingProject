@@ -27,16 +27,24 @@ public class TheLoan {
 		
 	}
 	
+	/*
+	 *Payment
+	 * Present value
+	 * Future value
+	 * Number Payments
+	 * 
+	 * Principal = TotalMonthlyPayment(=TotalPay+AdditionalPay) - InterestPayment
+	 */
 	
 	
 	
 	/*
-	 * PMT fxn
+	 * PMT fxn 
 	 * 
-	 * r - rate
+	 * r - interest rate
 	 * n- number of payments
-	 * p-present value
-	 * f - future value
+	 * p-present value(principal)
+	 * f - future value (how much money do you still owe on the loan after the loan is done.)
 	 * t - how its calculated(beginning or end of period)
 	 * 
 	 * static method no need to create instance
@@ -46,5 +54,16 @@ public class TheLoan {
 	 * 
 	 */
 	
+	
+	public double monthlyPayment(FinanceLib myLoan) {
+		
+		double paymentAmount = FinanceLib.pmt(interestRate/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
+		
+		return paymentAmount;
+	}
+	
+	public double interestPaymentPerMonth() {
+		double interestPerMonth = interestRate/12;
+	}
 	
 }
