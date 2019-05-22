@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
+import app.helper.TheLoan;
 
 public class LoanCalcViewController implements Initializable   {
 
@@ -21,6 +22,10 @@ public class LoanCalcViewController implements Initializable   {
 	
 	@FXML
 	private Label lblTotalPayemnts;
+	
+	@FXML
+	
+	private Label lblTotalInterest;
 	
 	@FXML
 	private DatePicker PaymentStartDate;
