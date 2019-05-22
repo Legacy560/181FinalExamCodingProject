@@ -27,7 +27,6 @@ public class LoanCalcViewController implements Initializable   {
 	private TextField TermLoan;
 	
 	@FXML
-	
 	private TextField AdditionalPayment;
 	
 	@FXML
@@ -58,12 +57,17 @@ public class LoanCalcViewController implements Initializable   {
 	 */
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
-
-		System.out.println("Amount: " + LoanAmount.getText());
-		double dLoanAmount = Double.parseDouble(LoanAmount.getText());
-		System.out.println("Amount: " + dLoanAmount);	
+//don't put commas in the loan amount.
 		
-		lblTotalPayemnts.setText("123");
+		
+		
+		double dLoanAmount = Double.parseDouble(LoanAmount.getText());
+		double dInterestRate = Double.parseDouble(InterestRate.getText());
+		double dTermLoan = Double.parseDouble(TermLoan.getText());
+		double dAdditionalPayment = Double.parseDouble(AdditionalPayment.getText());
+			
+		TheLoan myLoan = new TheLoan(dLoanAmount,dInterestRate,dTermLoan,0.0,false,dAdditionalPayment);
+		lblTotalPayemnts.setText(Integer.toString(myLoan.totalPaymentCalculation()));
 		
 		LocalDate localDate = PaymentStartDate.getValue();
 	 

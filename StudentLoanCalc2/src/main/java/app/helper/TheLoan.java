@@ -10,20 +10,20 @@ public class TheLoan {
 	double termOfLoan;
 	double futureValue;
 	boolean interestCalculation;
-	double principalPayment;
+	double extraPayment;
 	
 	//LinkedLists store values by ordinal position.
 	//private LinkedList<Payment> loanPayments = new LinkedList<Payment>();
 //constructor
 	public TheLoan(double loanAmount, double interestRate, double termOfLoan, double futureValue,
-			boolean interestCalculation, double principalPayment) {
+			boolean interestCalculation, double extraPayment) {
 		super();  
 		this.loanAmount = loanAmount;
 		this.interestRate = interestRate;
 		this.termOfLoan = termOfLoan;
 		this.futureValue = futureValue;
 		this.interestCalculation = interestCalculation;
-		this.principalPayment = principalPayment;
+		this.extraPayment = extraPayment;
 		
 	}
 	
@@ -54,16 +54,34 @@ public class TheLoan {
 	 * 
 	 */
 	
-	
-	public double monthlyPayment(FinanceLib myLoan) {
+	/*
+	public double monthlyPayment() {
 		
 		double paymentAmount = FinanceLib.pmt(interestRate/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
 		
 		return paymentAmount;
 	}
 	
+	
+	
 	public double interestPaymentPerMonth() {
 		double interestPerMonth = interestRate/12;
+		double interestPaymentPerMonth = interestPerMonth*loanAmount;
+	}
+	*/
+	public int totalPaymentCalculation() {
+		
+		double monthlyPaymentAmount = FinanceLib.pmt((interestRate/100)/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
+		int paymentCounter = 0;
+		double currentAmount = loanAmount;
+		do {
+			currentAmount = currentAmount -(monthlyPaymentAmount + extraPayment);
+			paymentCounter += 1;
+		}while(currentAmount > monthlyPaymentAmount);
+		
+		return paymentCounter;
 	}
 	
 }
+	
+
