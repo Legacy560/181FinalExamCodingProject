@@ -1,7 +1,7 @@
 package app.helper;
 
 import java.util.LinkedList;
-import org.apache.poi.ss.formula.functions.FinanceLib;
+import org.apache.poi.ss.formula.functions.*;
  
 
 public class TheLoan { 
@@ -70,14 +70,16 @@ public class TheLoan {
 	}
 	*/
 	public int totalPaymentCalculation() {
-		
+		//this is supposed to be negative.
 		double monthlyPaymentAmount = FinanceLib.pmt((interestRate/100)/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
 		int paymentCounter = 0;
 		double currentAmount = loanAmount;
+		
+		double payment = monthlyPaymentAmount - extraPayment;
 		do {
-			currentAmount = currentAmount -(monthlyPaymentAmount + extraPayment);
+			currentAmount = currentAmount + payment;
 			paymentCounter += 1;
-		}while(currentAmount > monthlyPaymentAmount);
+		}while(currentAmount > ((-1)*monthlyPaymentAmount));
 		
 		return paymentCounter;
 	}
