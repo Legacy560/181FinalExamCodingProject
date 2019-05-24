@@ -38,7 +38,7 @@ public class Payment{
 		this.balance = balance - this.totalPrincipal;
 	}
 	
-	double getPPMT()
+	public double getPPMT()
 	{
 		return Finance.ppmt((this.L.getInterestRate()/100)/12, this.PaymentID, (int) (this.L.getTermOfLoan()*12), this.L.loanAmount);
 		

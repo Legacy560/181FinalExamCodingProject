@@ -15,6 +15,7 @@ public class TheLoan {
 	double futureValue;
 	boolean interestCalculation;
 	double extraPayment;
+	int iPaymentNbr;
 	
 	
 	//LinkedLists store values by ordinal position.
@@ -29,9 +30,10 @@ public class TheLoan {
 		this.futureValue = futureValue;
 		this.interestCalculation = interestCalculation;
 		this.extraPayment = extraPayment;
-	
+		this.iPaymentNbr = 0;
+		
 	}
-		int iPaymentNbr = 0;
+		
 		Date dStartDate = null; {
 		try {
 			dStartDate = new SimpleDateFormat("yyyy-mm-dd").parse("2019-06-01");
@@ -40,35 +42,48 @@ public class TheLoan {
 		
 		
 		
+		}
+	public double totalPaymentAmount() {
+		
 		Payment p = new Payment(++iPaymentNbr,dStartDate,this.loanAmount, this);
 		this.loanPayments.add(p);
 		
-		double currentAmount = loanAmount;
-		double monthlyPaymentAmount = FinanceLib.pmt((interestRate/100)/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
+		
+		
+		double monthlyPaymentAmount = Math.abs(p.getPPMT() + extraPayment + p.getIPMT());
 	
-
+		
 	
+		
 
-		int counter = 0;
+		int counter = 1;
 
 		do {
 			
 			this.loanPayments.add(p);
 			counter+=1;
+			loanAmount -= monthlyPaymentAmount;
 			System.out.println(counter);
 			
-		}while(loanAmount > Math.abs(monthlyPaymentAmount));
+		}while(loanAmount > monthlyPaymentAmount);
 		
+		if(loanAmount < Math.abs(monthlyPaymentAmount)) {
+			this.loanPayments.add(p);
+			
+			counter += 1;
 		}
 		
-		public double totalPaymentAmount() {
+		
+		//loanAmount is negative by this point.
+		//Adding it to the total ensures that you are not overpaying the loan.
 			double total = 0;
 			for(Payment i: loanPayments) {
 				total += i.getTotalPrincipal() + i.getIPMT();
 				
 			}
-			return total;
+			return (Math.round(total/100.0)*100.0) + loanAmount;
 		}
+	
 	/*
 	 *Payment
 	 * Present value
