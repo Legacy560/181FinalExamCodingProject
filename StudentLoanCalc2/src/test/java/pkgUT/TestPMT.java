@@ -39,7 +39,7 @@ public class TestPMT {
 		
 		TheLoan loan = new TheLoan(p,r,n,f,t,500);
 		
-		int tp = loan.totalPaymentCalculation();
+		int tp = (int) loan.totalPaymentAmount();
 		
 		//System.out.println(PMT2);
 		
