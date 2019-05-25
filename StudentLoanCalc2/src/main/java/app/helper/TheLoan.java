@@ -50,9 +50,9 @@ public class TheLoan {
 		
 		
 		
-		double monthlyPaymentAmount = Math.abs(p.getPPMT() + extraPayment + p.getIPMT());
+		double monthlyPaymentAmount = Math.abs(p.getPPMT()) + Math.abs(p.getIPMT());
 	
-		
+		//double monthlyPA = FinanceLib.pmt((interestRate/100)/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
 	
 		
 
@@ -76,6 +76,7 @@ public class TheLoan {
 		
 		//loanAmount is negative by this point.
 		//Adding it to the total ensures that you are not overpaying the loan.
+		
 			double total = 0;
 			for(Payment i: loanPayments) {
 				total += i.getTotalPrincipal() + i.getIPMT();
@@ -84,6 +85,52 @@ public class TheLoan {
 			return (Math.round(total/100.0)*100.0) + loanAmount;
 		}
 	
+public double totalInterestAmount() {
+		
+		Payment p = new Payment(++iPaymentNbr,dStartDate,this.loanAmount, this);
+		this.loanPayments.add(p);
+		
+		
+		
+		double monthlyPaymentAmount = Math.abs(p.getPPMT()) + Math.abs(p.getIPMT());
+	
+		//double monthlyPA = FinanceLib.pmt((interestRate/100)/12,termOfLoan*12,loanAmount,futureValue,interestCalculation);
+	
+		
+
+		int counter = 1;
+
+		do {
+			
+			this.loanPayments.add(p);
+			counter+=1;
+			loanAmount -= monthlyPaymentAmount;
+			System.out.println(counter);
+			
+		}while(loanAmount > monthlyPaymentAmount);
+		
+		if(loanAmount < Math.abs(monthlyPaymentAmount)) {
+			this.loanPayments.add(p);
+			
+			counter += 1;
+		}
+		
+		
+		//loanAmount is negative by this point.
+		//Adding it to the total ensures that you are not overpaying the loan.
+		
+			double totalInt = 0;
+			for(Payment i: loanPayments) {
+				totalInt += i.getIPMT();
+				
+			}
+			return (Math.round(totalInt/100.0)*100.0);
+		}
+	
+
+//Scrap code below.
+
+
 	/*
 	 *Payment
 	 * Present value

@@ -71,6 +71,8 @@ public class LoanCalcViewController implements Initializable   {
 		
 		lblTotalPayemnts.setText(Double.toString(myLoan.totalPaymentAmount()));
 		
+		lblTotalInterest.setText(Double.toString(myLoan.totalInterestAmount()));
+		
 		LocalDate localDate = PaymentStartDate.getValue();
 	 
 		System.out.println(localDate);

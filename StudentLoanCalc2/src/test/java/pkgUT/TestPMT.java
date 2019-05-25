@@ -39,15 +39,39 @@ public class TestPMT {
 		
 		TheLoan loan = new TheLoan(p,r,n,f,t,500);
 		
-		int tp = (int) loan.totalPaymentAmount();
+		double tp =  loan.totalPaymentAmount();
 		
 		//System.out.println(PMT2);
 		
-		int tpExpected = 145;
+		double tpExpected = 297336.69;
 		
 		assertEquals(tpExpected, tp, 0.01);
 		
 	}
+	
+	@Test
+	
+	public void testTotalInterest() {
+		double PMT2;
+		double r = 7;
+		double n = 20;
+		double p = 200000;
+		double f = 0;
+		boolean t = false;
+		PMT2 = Math.abs(FinanceLib.pmt(r, n, p, f, t));
+		
+		TheLoan loan = new TheLoan(p,r,n,f,t,500);
+		
+		double ti =  loan.totalInterestAmount();
+		
+		
+		
+		double tpExpected = 96679.26;
+		
+		assertEquals(tpExpected, ti, 0.01);
+		
+	}
+	
 
 }
 

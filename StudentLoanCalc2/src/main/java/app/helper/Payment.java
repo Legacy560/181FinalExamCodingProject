@@ -3,6 +3,7 @@ package app.helper;
 import java.util.Date;
 
 import org.apache.poi.ss.formula.functions.Finance;
+import org.apache.poi.ss.formula.functions.FinanceLib;
 
 public class Payment{
 
@@ -13,6 +14,8 @@ public class Payment{
 	private double PPMT; //PPMT for a payment
 	
 	private double totalPrincipal;
+	
+	
 	
 	private double balance;
 	
@@ -43,6 +46,10 @@ public class Payment{
 		return Finance.ppmt((this.L.getInterestRate()/100)/12, this.PaymentID, (int) (this.L.getTermOfLoan()*12), this.L.loanAmount);
 		
 	}
+	
+	
+
+	
 
 	public double getIPMT() {
 		return  balance * ((this.L.getInterestRate()/100) / 12);
