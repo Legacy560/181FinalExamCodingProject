@@ -82,7 +82,7 @@ public class TheLoan {
 				total += i.getTotalPrincipal() + i.getIPMT();
 				
 			}
-			return (Math.round(total/100.0)*100.0) + loanAmount;
+			return (Math.round((total + loanAmount)*100.0)/100.0);
 		}
 	
 public double totalInterestAmount() {
@@ -124,7 +124,7 @@ public double totalInterestAmount() {
 				totalInt += i.getIPMT();
 				
 			}
-			return (Math.round(totalInt/100.0)*100.0);
+			return (Math.round(totalInt*100.0)/100.0);
 		}
 	
 
